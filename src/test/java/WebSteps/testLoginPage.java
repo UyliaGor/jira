@@ -1,27 +1,24 @@
 package WebSteps;
 
 
-import PageObject.CreateTaskPage;
 import PageObject.LoginPage;
-import PageObject.MainPage;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import sun.tools.jar.Main;
-
-import static java.nio.channels.SocketChannel.open;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class testLoginPage {
     String login = "gugorelikova",
            password = "123qaz!@#QAZ",
            typeproject = "Test",
            task = "TestSelenium",
+            // typetask = "Ошибка",
            topictask = "Ошибка АТ «Фамилия»",
-            descriptionTask = "Ошибка АТ «Фамилия»",
-            priorityTask = "Medium",
+            //descriptionTask = "Ошибка АТ «Фамилия»",
+            priorityTask = "Low",
             labelTask = "labelTask",
             authorTask = "Гореликова Юлия Сергеевна";
     @BeforeAll
@@ -60,7 +57,7 @@ public class testLoginPage {
     }
     @Test
     public void testCreateTask() {
-        Selenide.open("https://edujira.ifellow.ru/secure/Dashboard.jspa", MainPage.class)
+        Selenide.open("https://edujira.ifellow.ru/secure/Dashboard.jspa", LoginPage.class)
                 .clickToValUserName(login)
                 .clickToValPassWord(password)
                 .clickToCheckbox()
@@ -68,10 +65,11 @@ public class testLoginPage {
                 .clickToCreatetask()
                 .selectTypetask()
                 .createTopicTask(topictask)
-                .createDescriptionTask(descriptionTask)
-                .selectPriorityTask(priorityTask)
-                .selectLabelTask(labelTask)
-                .selectauthorTask(authorTask);
+                //.createDescriptionTask(descriptionTask)
+                .selectPriorityTask();
+        System.out.println("1233");
+                //.selectLabelTask(labelTask)
+                //.selectauthorTask(authorTask);
 
     }
     @AfterEach

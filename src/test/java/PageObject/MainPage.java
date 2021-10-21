@@ -44,6 +44,9 @@ public class MainPage extends LoginPage {
     @FindBy (how = How.XPATH, using = "//span[text()='Version 2.0']")
     private SelenideElement checkVersion;
 
+    @FindBy(how = How.XPATH, using = "//a[@id='create_link']")
+    private SelenideElement createLink;
+
     public CreateTaskPage clickTobuttonProject() {
         buttonprojects.click();
         return page(CreateTaskPage.class);
@@ -101,6 +104,12 @@ public class MainPage extends LoginPage {
         checkVersion.shouldHave(text("Version 2.0"));
         return page(CreateTaskPage.class);
     }
+
+    public CreateTaskPage clickToCreatetask() {
+        createLink.click();
+        return page(CreateTaskPage.class);
+    }
+
 
 
 
