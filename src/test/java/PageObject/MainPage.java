@@ -1,6 +1,7 @@
 package PageObject;
 
 import com.codeborne.selenide.SelenideElement;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -34,9 +35,6 @@ public class MainPage extends LoginPage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'1 из')]")
     private SelenideElement counttask;
 
-    // @FindBy(how = How.XPATH, using = "//span[text()='Задачи']")
-    //private SelenideElement buttontasks;
-
     @FindBy(how = How.XPATH, using = "//input[@id='quickSearchInput']")
     private SelenideElement searchform;
 
@@ -46,80 +44,62 @@ public class MainPage extends LoginPage {
     @FindBy (how = How.XPATH, using = "//span[text()='Version 2.0']")
     private SelenideElement checkVersion;
 
-
-
-
-    // @FindBy(how = How.XPATH, using = "//li[@id='issues_new_search_link']")
-    // private SelenideElement buttonsearchtasks;
-
-    // @FindBy(how = How.XPATH, using = "//input[@id='searcher-query']")
-    // private SelenideElement searchtaskstext;
-
-
-
-
-    public MainPage clickTobuttonProject() {
+    public CreateTaskPage clickTobuttonProject() {
         buttonprojects.click();
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
-    public MainPage viewAllProject() {
+    public CreateTaskPage viewAllProject() {
         buttonallprojects.click();
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
 
-    public MainPage searchProject(String typeproject) {
+    public CreateTaskPage searchProject(String typeproject) {
         searchprojects.click();
         searchprojects.sendKeys(typeproject);
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
-    public MainPage goToProject() {
+    public CreateTaskPage goToProject() {
         linkproject.click();
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
-    public MainPage goToTask() {
+    public CreateTaskPage goToTask() {
         tasklist.click();
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
-    public MainPage buttonFilterTask() {
+    public CreateTaskPage buttonFilterTask() {
         filtertask.click();
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
-    public MainPage selectTask() {
+    public CreateTaskPage selectTask() {
         buttonalltask.click();
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
-    public MainPage checkCountTask() {
+    public CreateTaskPage checkCountTask() {
         String
                  text = counttask.text(),
                  probel = "из";
         int x1 = text.indexOf(probel), y = text.length();
         String word = text.substring(x1+2, y);
         System.out.println(word);
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
 
     }
-    //public MainPage clickTobuttonTasks(){
-       // buttontasks.click();
-        //buttonsearchtasks.click();
-        //return page(MainPage.class);
-    //}
 
-
-    public MainPage searchTaskbyText(String task){
+    public CreateTaskPage searchTaskbyText(String task){
         searchform.click();
         searchform.sendKeys(task);
         searchform.pressEnter();
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
 
-    public MainPage checkStatus() {
+    public CreateTaskPage checkStatus() {
         checkStatus.shouldBe(visible);
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
 
-    public MainPage checkVersion() {
+    public CreateTaskPage checkVersion() {
         checkVersion.shouldHave(text("Version 2.0"));
-        return page(MainPage.class);
+        return page(CreateTaskPage.class);
     }
 
 

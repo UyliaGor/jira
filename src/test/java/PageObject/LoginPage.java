@@ -23,19 +23,19 @@ public class LoginPage {
     @FindBy(how = How.XPATH, using = "//div[@class='aui-page-header-main']/h1")
     private SelenideElement successfulRegistr;
 
-    public LoginPage clickToValUserName(String login){
+    public MainPage clickToValUserName(String login){
         UserName.click();
         UserName.sendKeys(login);
-        return page(LoginPage.class);
+        return page(MainPage.class);
     }
-    public LoginPage clickToValPassWord(String password) {
+    public MainPage clickToValPassWord(String password) {
         PassWord.click();
         PassWord.sendKeys(password);
-        return page(LoginPage.class);
+        return page(MainPage.class);
     }
-    public LoginPage clickToCheckbox() {
+    public MainPage clickToCheckbox() {
         CheckboxRemember.click();
-        return page(LoginPage.class);
+        return page(MainPage.class);
     }
     public MainPage clickButtonLogin() {
         buttonLogin.click();
