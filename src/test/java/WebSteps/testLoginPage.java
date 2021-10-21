@@ -20,7 +20,10 @@ public class testLoginPage {
            typeproject = "Test",
            task = "TestSelenium",
            topictask = "Ошибка АТ «Фамилия»",
-            descriptionTask = "Ошибка АТ «Фамилия»";
+            descriptionTask = "Ошибка АТ «Фамилия»",
+            priorityTask = "Medium",
+            labelTask = "labelTask",
+            authorTask = "Гореликова Юлия Сергеевна";
     @BeforeAll
     static void setup() {
         Configuration.startMaximized = true;
@@ -65,7 +68,11 @@ public class testLoginPage {
                 .clickToCreatetask()
                 .selectTypetask()
                 .createTopicTask(topictask)
-               .createDescriptionTask(descriptionTask);
+                .createDescriptionTask(descriptionTask)
+                .selectPriorityTask(priorityTask)
+                .selectLabelTask(labelTask)
+                .selectauthorTask(authorTask);
+
     }
     @AfterEach
     public void driverClose() {

@@ -20,7 +20,7 @@ public class MainPage extends LoginPage {
     @FindBy(how = How.XPATH, using = "//input[@id='project-filter-text']")
     private SelenideElement searchprojects;
 
-    @FindBy(how = How.XPATH, using = "//td[@class='cell-type-name']//a[@title='Test']") //конкретность ввода
+    @FindBy(how = How.XPATH, using = "//td[@class='cell-type-name']//a[@title='Test']")
     private SelenideElement linkproject;
 
     @FindBy(how = How.XPATH, using = "//a[@class='aui-nav-item ' ]//span[text()='Задачи']")
