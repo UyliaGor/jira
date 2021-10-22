@@ -4,9 +4,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
 
@@ -18,10 +16,7 @@ public class CreateTaskPage extends MainPage {
         @FindBy(how = How.XPATH, using = "//input[@id='summary']")
         private SelenideElement topic;
 
-        //@FindBy(how = How.XPATH, using = "//div[@id='description-wiki-edit']//div[@class='rte-container']")
-        //private SelenideElement description;
-
-        @FindBy(how = How.XPATH, using = "//select[@id='versions']//option[@value='10001']")
+        @FindBy(how = How.XPATH, using = "//select[@id='fixVersions']//option[@value='10001']")
         private SelenideElement versions;
 
         @FindBy(how = How.XPATH, using = "//input[@id='priority-field']")
@@ -29,6 +24,9 @@ public class CreateTaskPage extends MainPage {
 
         @FindBy(how = How.XPATH, using = "//div[@id='labels-multi-select']//textarea[@id='labels-textarea']")
         private SelenideElement label;
+
+        @FindBy(how = How.XPATH, using = "//select[@id='versions']//option[@value='10001']")
+        private SelenideElement vers;
 
         @FindBy(how = How.XPATH, using = "//a[@id='assign-to-me-trigger']")
         private SelenideElement author;
@@ -48,7 +46,7 @@ public class CreateTaskPage extends MainPage {
         @FindBy(how = How.XPATH, using = "//a[@id='opsbar-transitions_more']//span[@class='dropdown-text']")
         private SelenideElement dropdownStatusTask;
 
-        @FindBy(how = How.XPATH, using = "")
+        @FindBy(how = How.XPATH, using = "//a[@class='issueaction-workflow-transition']//span[text()='Выполнено']")
         private SelenideElement doneStatusTask;
 
         @FindBy(how = How.XPATH, using = "//span[@id='status-val']//span[text()='Готово']")
@@ -60,17 +58,15 @@ public class CreateTaskPage extends MainPage {
         @FindBy(how = How.XPATH, using = "//input[@id='issue-comment-add-submit']")
         private SelenideElement buttonAddcomment;
 
-        @FindBy(how = How.XPATH, using = "//div[@class='action-details flooded']")
-        private SelenideElement visiblecomment;
 
         public CreateTaskPage selectTypetask() {
                 typeEpic.click();
                 typeEpic.sendKeys("Ошибка");
                 return page(CreateTaskPage.class);
         }
-        public CreateTaskPage createTopicTask(String topictask) {
-                topic.setValue(topictask);
-                topic.pressEnter();
+        public CreateTaskPage createTopicTask() {
+                topic.click();
+                topic.sendKeys("Ошибка АТ Фамилия");
                 return page(CreateTaskPage.class);
         }
 
@@ -84,21 +80,23 @@ public class CreateTaskPage extends MainPage {
         }
 
         public CreateTaskPage selectVersionTask() {
-                versions.scrollTo();
                 versions.click();
                 return page(CreateTaskPage.class);
         }
         public CreateTaskPage selectPriorityTask() {
-                priority.scrollTo();
                 priority.click();
                 priority.sendKeys("Low");
                 priority.pressEnter();
                return page(CreateTaskPage.class);
         }
-        public CreateTaskPage selectLabelTask(String labelTask) {
+        public CreateTaskPage selectLabelTask() {
                 label.click();
-                label.val(labelTask);
+                label.sendKeys("blitz_test");
                 label.pressEnter();
+                return page(CreateTaskPage.class);
+        }
+        public CreateTaskPage selectversTask() {
+                vers.click();
                 return page(CreateTaskPage.class);
         }
 
@@ -135,9 +133,14 @@ public class CreateTaskPage extends MainPage {
                 statusTask.shouldHave(text("В работе"));
                 return page(CreateTaskPage.class);
         }
+        public CreateTaskPage changeStatusTask () {
+                dropdownStatusTask.click();
+                doneStatusTask.click();
+                return page(CreateTaskPage.class);
+        }
 
-        public CreateTaskPage checkdoneStatusTask() {
-                statusTask.shouldHave(text("Готово"));
+        public CreateTaskPage checkStatus() {
+                checkdoneStatusTask.shouldHave(text("Готово"));
                 return page(CreateTaskPage.class);
         }
 
@@ -157,11 +160,6 @@ public class CreateTaskPage extends MainPage {
 
         public CreateTaskPage addComment(){
                 buttonAddcomment.click();
-                return page(CreateTaskPage.class);
-        }
-
-        public CreateTaskPage checkVisibleComment(){
-                visiblecomment.shouldBe(visible);
                 return page(CreateTaskPage.class);
         }
 

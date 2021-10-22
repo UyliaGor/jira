@@ -36,7 +36,7 @@ public class MainPage extends LoginPage {
     private SelenideElement searchform;
 
     @FindBy (how = How.XPATH, using = "//span[@id='status-val']//span")
-    private SelenideElement checkStatus;
+    private SelenideElement checkStatustest;
 
     @FindBy (how = How.XPATH, using = "//span[text()='Version 2.0']")
     private SelenideElement checkVersion;
@@ -92,8 +92,8 @@ public class MainPage extends LoginPage {
         return page(CreateTaskPage.class);
     }
 
-    public CreateTaskPage checkStatus() {
-        checkStatus.shouldBe(visible);
+    public CreateTaskPage checkStatusTest() {
+        checkStatustest.shouldBe(visible);
         return page(CreateTaskPage.class);
     }
 

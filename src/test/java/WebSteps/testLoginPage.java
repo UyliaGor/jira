@@ -7,7 +7,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class testLoginPage {
@@ -15,7 +14,7 @@ public class testLoginPage {
            password = "123qaz!@#QAZ",
            typeproject = "Test",
            task = "TestSelenium",
-           topictask = "Ошибка АТ «Фамилия»",
+           topictask = "Ошибка АТ Фамилия",
             labelTask = "blitz_test";
 
     @BeforeAll
@@ -34,8 +33,7 @@ public class testLoginPage {
                 .clickToValUserName(login)
                 .clickToValPassWord(password)
                 .clickToCheckbox()
-                .clickButtonLogin()
-                .should_be_authorized_user();
+                .clickButtonLogin();
     }
     @Test
     public void testTaskProgect() {
@@ -53,7 +51,7 @@ public class testLoginPage {
                 .selectTask()
                 .checkCountTask()
                 .searchTaskbyText(task)
-                .checkStatus()
+                .checkStatusTest()
                 .checkVersion();
 
     }
@@ -66,14 +64,23 @@ public class testLoginPage {
                 .clickButtonLogin()
                 .clickToCreatetask()
                 .selectTypetask()
-                .createTopicTask(topictask)
-                //.createDescriptionTask()
-              //  .selectVersionTask()
+                .createTopicTask()
+                .createDescriptionTask()
+                .selectVersionTask()
                 .selectPriorityTask()
-                .selectLabelTask(labelTask)
-                //.createEnvironmentTask()
+                .selectLabelTask()
+                .selectversTask()
+                .createEnvironmentTask()
                 .selectauthorTask()
-                .createTask();
+                .createTask()
+                .goToCreatedTask()
+                .clickToButtonInwork()
+                .checkStatusTask()
+                .changeStatusTask ()
+                .checkStatus()
+                .clickButtonComment()
+                .createComment()
+                .addComment();
 
     }
 
