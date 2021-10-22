@@ -1,14 +1,11 @@
 package PageObject;
 
 import com.codeborne.selenide.SelenideElement;
-import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
-import static jdk.nashorn.internal.objects.NativeString.substring;
 
 public class MainPage extends LoginPage {
     @FindBy(how = How.XPATH, using = "//a[@id='browse_link']")
@@ -109,11 +106,5 @@ public class MainPage extends LoginPage {
         createLink.click();
         return page(CreateTaskPage.class);
     }
-
-
-
-
-
-
 
 }

@@ -1,15 +1,16 @@
 package PageObject;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
 
 public class CreateTaskPage extends MainPage {
-        @FindBy(how = How.XPATH, using = "//a[@id='create_link']")
-        private SelenideElement createLink;
 
         @FindBy(how = How.XPATH, using = "//input[@id='issuetype-field']")
         private SelenideElement typeEpic;
@@ -20,42 +21,78 @@ public class CreateTaskPage extends MainPage {
         //@FindBy(how = How.XPATH, using = "//div[@id='description-wiki-edit']//div[@class='rte-container']")
         //private SelenideElement description;
 
+        @FindBy(how = How.XPATH, using = "//select[@id='versions']//option[@value='10001']")
+        private SelenideElement versions;
+
         @FindBy(how = How.XPATH, using = "//input[@id='priority-field']")
         private SelenideElement priority;
 
         @FindBy(how = How.XPATH, using = "//div[@id='labels-multi-select']//textarea[@id='labels-textarea']")
         private SelenideElement label;
 
-        @FindBy(how = How.XPATH, using = "//div[@id='assignee-single-select']//input")
+        @FindBy(how = How.XPATH, using = "//a[@id='assign-to-me-trigger']")
         private SelenideElement author;
 
+        @FindBy(how = How.XPATH, using = "//input[@id='create-issue-submit']")
+        private SelenideElement buttonCreateTask;
 
-        // //input[@id="create-issue-submit"] - xpath кнопки создать
+        @FindBy(how = How.XPATH, using = "//a[@class='issue-created-key issue-link']")
+        private SelenideElement linktoTask;
 
-        public CreateTaskPage  clickToCreatetask() {
-                createLink.click();
-                return page(CreateTaskPage .class);
-        }
+        @FindBy(how = How.XPATH, using = "//span[text()='В работе']")
+        private SelenideElement buttonInwork;
+
+        @FindBy(how = How.XPATH, using = "//span[@id='status-val']//span")
+        private SelenideElement statusTask;
+
+        @FindBy(how = How.XPATH, using = "//a[@id='opsbar-transitions_more']//span[@class='dropdown-text']")
+        private SelenideElement dropdownStatusTask;
+
+        @FindBy(how = How.XPATH, using = "")
+        private SelenideElement doneStatusTask;
+
+        @FindBy(how = How.XPATH, using = "//span[@id='status-val']//span[text()='Готово']")
+        private SelenideElement checkdoneStatusTask;
+
+        @FindBy(how = How.XPATH, using = "//a[@id='footer-comment-button']")
+        private SelenideElement buttonComment;
+
+        @FindBy(how = How.XPATH, using = "//input[@id='issue-comment-add-submit']")
+        private SelenideElement buttonAddcomment;
+
+        @FindBy(how = How.XPATH, using = "//div[@class='action-details flooded']")
+        private SelenideElement visiblecomment;
+
         public CreateTaskPage selectTypetask() {
                 typeEpic.click();
                 typeEpic.sendKeys("Ошибка");
                 return page(CreateTaskPage.class);
         }
         public CreateTaskPage createTopicTask(String topictask) {
-                topic.sendKeys(topictask);
+                topic.setValue(topictask);
                 topic.pressEnter();
                 return page(CreateTaskPage.class);
         }
-        //public CreateTaskPage createDescriptionTask(String descriptionTask) {
-               // description.click();
-                //description.val(descriptionTask);
-                //description.pressEnter();
-                //return page(CreateTaskPage.class);
-       // }
+
+        public CreateTaskPage createDescriptionTask(){
+                Selenide.switchTo().defaultContent();
+                SelenideElement iframe = $x("//body['#aui-layout aui-theme-default ka ajax-issue-search-and-view page-type-navigator page-type-split']/ancestor::html[@class = 'webkit chrome']//div[@class = 'jira-wikifield']//div[@id = 'description-wiki-edit']//iframe");
+                Selenide.switchTo().frame(iframe);
+                $x("//body[@id = 'tinymce']/p").sendKeys("Ошибка");
+                Selenide.switchTo().defaultContent();
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage selectVersionTask() {
+                versions.scrollTo();
+                versions.click();
+                return page(CreateTaskPage.class);
+        }
         public CreateTaskPage selectPriorityTask() {
+                priority.scrollTo();
                 priority.click();
-               priority.sendKeys("Highest");
-               priority.pressEnter();
+                priority.sendKeys("Low");
+                priority.pressEnter();
                return page(CreateTaskPage.class);
         }
         public CreateTaskPage selectLabelTask(String labelTask) {
@@ -64,12 +101,70 @@ public class CreateTaskPage extends MainPage {
                 label.pressEnter();
                 return page(CreateTaskPage.class);
         }
-        public CreateTaskPage selectauthorTask(String authorTask) {
-                author.click();
-                author.val(authorTask);
-                author.pressEnter();
+
+        public CreateTaskPage createEnvironmentTask(){
+                Selenide.switchTo().defaultContent();
+                SelenideElement iframe = $x("//body['#aui-layout aui-theme-default ka ajax-issue-search-and-view page-type-navigator page-type-split']/ancestor::html[@class = 'webkit chrome']//div[@class = 'jira-wikifield']//div[@id='environment-wiki-edit']//iframe");
+                Selenide.switchTo().frame(iframe);
+                $x("//body[@id = 'tinymce']/p").sendKeys("Windows 7");
+                Selenide.switchTo().defaultContent();
                 return page(CreateTaskPage.class);
         }
+
+        public CreateTaskPage selectauthorTask() {
+                author.click();
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage createTask() {
+                buttonCreateTask.click();
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage goToCreatedTask() {
+                linktoTask.click();
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage clickToButtonInwork() {
+                buttonInwork.click();
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage checkStatusTask() {
+                statusTask.shouldHave(text("В работе"));
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage checkdoneStatusTask() {
+                statusTask.shouldHave(text("Готово"));
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage clickButtonComment() {
+                buttonComment.click();
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage createComment(){
+                Selenide.switchTo().defaultContent();
+                SelenideElement iframe = $x("//body/ancestor::html//iframe");
+                Selenide.switchTo().frame(iframe);
+                $x("//body[@id = 'tinymce']/p").sendKeys("Задание выполнено");
+                Selenide.switchTo().defaultContent();
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage addComment(){
+                buttonAddcomment.click();
+                return page(CreateTaskPage.class);
+        }
+
+        public CreateTaskPage checkVisibleComment(){
+                visiblecomment.shouldBe(visible);
+                return page(CreateTaskPage.class);
+        }
+
 
 
 

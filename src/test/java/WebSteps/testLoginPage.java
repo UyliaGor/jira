@@ -15,15 +15,17 @@ public class testLoginPage {
            password = "123qaz!@#QAZ",
            typeproject = "Test",
            task = "TestSelenium",
-            // typetask = "Ошибка",
            topictask = "Ошибка АТ «Фамилия»",
-            //descriptionTask = "Ошибка АТ «Фамилия»",
-            priorityTask = "Low",
-            labelTask = "labelTask",
-            authorTask = "Гореликова Юлия Сергеевна";
+            labelTask = "blitz_test";
+
     @BeforeAll
     static void setup() {
         Configuration.startMaximized = true;
+    }
+
+    @AfterEach
+    public void driverClose() {
+        WebDriverRunner.closeWebDriver();
     }
 
     @Test
@@ -65,16 +67,15 @@ public class testLoginPage {
                 .clickToCreatetask()
                 .selectTypetask()
                 .createTopicTask(topictask)
-                //.createDescriptionTask(descriptionTask)
-                .selectPriorityTask();
-        System.out.println("1233");
-                //.selectLabelTask(labelTask)
-                //.selectauthorTask(authorTask);
+                //.createDescriptionTask()
+              //  .selectVersionTask()
+                .selectPriorityTask()
+                .selectLabelTask(labelTask)
+                //.createEnvironmentTask()
+                .selectauthorTask()
+                .createTask();
 
     }
-    @AfterEach
-    public void driverClose() {
-        WebDriverRunner.closeWebDriver();
-    }
+
 
 }
