@@ -14,15 +14,6 @@ import org.junit.runner.RunWith;
 )
 
 public class RunnerTest {
-    @BeforeClass
-    public static void allureSubThreadParallel() {
-        String listenerName = "AllureSelenide";
 
-        if (!(SelenideLogger.hasListener(listenerName)))
-            SelenideLogger.addListener(listenerName,
-                    new AllureSelenide().
-                            screenshots(true).
-                            savePageSource(false));
-    }
 
 }
