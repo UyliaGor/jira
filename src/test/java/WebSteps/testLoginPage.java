@@ -2,14 +2,12 @@ package WebSteps;
 
 
 import PageObject.LoginPage;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import hooks.Webhooks;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class testLoginPage {
+public class testLoginPage extends Webhooks{
     String login = "gugorelikova",
            password = "123qaz!@#QAZ",
            typeproject = "Test",
@@ -17,17 +15,9 @@ public class testLoginPage {
            topictask = "Ошибка АТ Фамилия",
             labelTask = "blitz_test";
 
-    @BeforeAll
-    static void setup() {
-        Configuration.startMaximized = true;
-    }
-
-    @AfterEach
-    public void driverClose() {
-        WebDriverRunner.closeWebDriver();
-    }
-
+    @DisplayName("Авторизация")
     @Test
+
     public void autorizeJira(){
         Selenide.open("https://edujira.ifellow.ru/secure/Dashboard.jspa", LoginPage.class)
                 .clickToValUserName(login)
@@ -35,7 +25,9 @@ public class testLoginPage {
                 .clickToCheckbox()
                 .clickButtonLogin();
     }
+    @DisplayName("Проверка задачи в проекте")
     @Test
+
     public void testTaskProgect() {
         Selenide.open("https://edujira.ifellow.ru/secure/Dashboard.jspa", LoginPage.class)
                 .clickToValUserName(login)
@@ -55,7 +47,9 @@ public class testLoginPage {
                 .checkVersion();
 
     }
+    @DisplayName("Создание задачи")
     @Test
+
     public void testCreateTask() {
         Selenide.open("https://edujira.ifellow.ru/secure/Dashboard.jspa", LoginPage.class)
                 .clickToValUserName(login)

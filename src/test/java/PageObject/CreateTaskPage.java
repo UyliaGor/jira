@@ -2,6 +2,7 @@ package PageObject;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Condition.text;
@@ -58,18 +59,19 @@ public class CreateTaskPage extends MainPage {
         @FindBy(how = How.XPATH, using = "//input[@id='issue-comment-add-submit']")
         private SelenideElement buttonAddcomment;
 
-
+        @Step("выбор типа задачи")
         public CreateTaskPage selectTypetask() {
                 typeEpic.click();
                 typeEpic.sendKeys("Ошибка");
                 return page(CreateTaskPage.class);
         }
+        @Step("название задачи")
         public CreateTaskPage createTopicTask() {
                 topic.click();
                 topic.sendKeys("Ошибка АТ Фамилия");
                 return page(CreateTaskPage.class);
         }
-
+        @Step("описание задачи")
         public CreateTaskPage createDescriptionTask(){
                 Selenide.switchTo().defaultContent();
                 SelenideElement iframe = $x("//body['#aui-layout aui-theme-default ka ajax-issue-search-and-view page-type-navigator page-type-split']/ancestor::html[@class = 'webkit chrome']//div[@class = 'jira-wikifield']//div[@id = 'description-wiki-edit']//iframe");
@@ -78,28 +80,31 @@ public class CreateTaskPage extends MainPage {
                 Selenide.switchTo().defaultContent();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("версия задачи")
         public CreateTaskPage selectVersionTask() {
                 versions.click();
                 return page(CreateTaskPage.class);
         }
+        @Step("приоритет задачи")
         public CreateTaskPage selectPriorityTask() {
                 priority.click();
                 priority.sendKeys("Low");
                 priority.pressEnter();
                return page(CreateTaskPage.class);
         }
+        @Step("метка задачи")
         public CreateTaskPage selectLabelTask() {
                 label.click();
                 label.sendKeys("blitz_test");
                 label.pressEnter();
                 return page(CreateTaskPage.class);
         }
+        @Step("версия задачи")
         public CreateTaskPage selectversTask() {
                 vers.click();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("окружение задачи")
         public CreateTaskPage createEnvironmentTask(){
                 Selenide.switchTo().defaultContent();
                 SelenideElement iframe = $x("//body['#aui-layout aui-theme-default ka ajax-issue-search-and-view page-type-navigator page-type-split']/ancestor::html[@class = 'webkit chrome']//div[@class = 'jira-wikifield']//div[@id='environment-wiki-edit']//iframe");
@@ -108,47 +113,48 @@ public class CreateTaskPage extends MainPage {
                 Selenide.switchTo().defaultContent();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("автор задачи")
         public CreateTaskPage selectauthorTask() {
                 author.click();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("клик по кнопки создание задачи")
         public CreateTaskPage createTask() {
                 buttonCreateTask.click();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("переход на созданную задачу")
         public CreateTaskPage goToCreatedTask() {
                 linktoTask.click();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("клик по кнопке в работе")
         public CreateTaskPage clickToButtonInwork() {
                 buttonInwork.click();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("проверка статуса задачи")
         public CreateTaskPage checkStatusTask() {
                 statusTask.shouldHave(text("В работе"));
                 return page(CreateTaskPage.class);
         }
+        @Step("изменение статуса задачи")
         public CreateTaskPage changeStatusTask () {
                 dropdownStatusTask.click();
                 doneStatusTask.click();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("проверка изменения статуса задачи")
         public CreateTaskPage checkStatus() {
                 checkdoneStatusTask.shouldHave(text("Готово"));
                 return page(CreateTaskPage.class);
         }
-
+        @Step("клик по кнопки создание коммента")
         public CreateTaskPage clickButtonComment() {
                 buttonComment.click();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("создание комментария")
         public CreateTaskPage createComment(){
                 Selenide.switchTo().defaultContent();
                 SelenideElement iframe = $x("//body/ancestor::html//iframe");
@@ -157,14 +163,9 @@ public class CreateTaskPage extends MainPage {
                 Selenide.switchTo().defaultContent();
                 return page(CreateTaskPage.class);
         }
-
+        @Step("добавление комментария к задачи")
         public CreateTaskPage addComment(){
                 buttonAddcomment.click();
                 return page(CreateTaskPage.class);
         }
-
-
-
-
-
 }
